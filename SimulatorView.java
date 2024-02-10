@@ -22,7 +22,7 @@ public class SimulatorView extends Application {
     public static final int GRID_WIDTH = 100;
     public static final int GRID_HEIGHT = 80;    
     public static final int WIN_WIDTH = 650;
-    public static final int WIN_HEIGHT = 650;  
+    public static final int WIN_HEIGHT = 650;
     
     private static final Color EMPTY_COLOR = Color.WHITE;
 
