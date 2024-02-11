@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class Simulator {
 
-    private static final double MYCOPLASMA_ALIVE_PROB = 0.25;
+    private static final double MYCOPLASMA_ALIVE_PROB = .25;
     private List<Cell> cells;
     private Field field;
     private int generation;
@@ -66,10 +66,11 @@ public class Simulator {
     /**
      * Randomly populate the field live/dead life forms
      */
-    private void populate() {
+    private void populate() 
+    {
       Random rand = Randomizer.getRandom();
       field.clear();
-      for (int row = 0; row < field.getDepth(); row++) {
+      /*for (int row = 0; row < field.getDepth(); row++) {
         for (int col = 0; col < field.getWidth(); col++) {
           Location location = new Location(row, col);
           Mycoplasma myco = new Mycoplasma(field, location, Color.ORANGE);
@@ -80,15 +81,106 @@ public class Simulator {
             myco.setDead();
             cells.add(myco);
           }
+       */   
+      //stable shapes
+      /*
+      //****
+        for (int row = 0; row < field.getDepth(); row++) {
+         for (int col = 0; col < field.getWidth(); col++) 
+         {
+          Location location = new Location(row, col);
+          Mycoplasma myco = new Mycoplasma(field, location, Color.ORANGE);
+          if (row==2 && (col==3 || col==4||col==5||col==6))
+          {
+            cells.add(myco);
+          }
+          else
+          {
+             myco.setDead();
+            cells.add(myco); 
+          }
         }
-      }
     }
+        //Reapeted shape
+        for (int row = 0; row < field.getDepth(); row++) 
+        {
+         for (int col = 0; col < field.getWidth(); col++) 
+         {
+          Location location = new Location(row, col);
+          Mycoplasma myco = new Mycoplasma(field, location, Color.ORANGE);
+          if (row==5 && col==4 || row==6 &&(col==3 || col==4||col==5))
+          {
+            cells.add(myco);
+          }
+          else
+          {
+             myco.setDead();
+            cells.add(myco); 
+          }
+          }
+        }
+    
+        for (int row = 0; row < field.getDepth(); row++) 
+        {
+         for (int col = 0; col < field.getWidth(); col++) 
+         {
+          Location location = new Location(row, col);
+          Mycoplasma myco = new Mycoplasma(field, location, Color.ORANGE);
+          if (col==16 && (row==1|| row==2 || row==3))
+          {
+            cells.add(myco);
+          }
+          else
+          {
+             myco.setDead();
+            cells.add(myco); 
+          }
+          }
+        }
+        
+        */
+       
+       
+       for (int row = 0; row < field.getDepth(); row++) {
+    for (int col = 0; col < field.getWidth(); col++) {
+        Location location = new Location(row, col);
+        Mycoplasma myco = new Mycoplasma(field, location, Color.ORANGE);
+
+        // stable train
+        if (row == 2 && (col == 3 || col == 4 || col == 5 || col == 6)) {
+            cells.add(myco);
+        }
+        // repeated mashroom shape
+      //  else if (row == 5 && col == 4 || row == 6 && (col == 3 || col == 4 || col == 5)) {
+         //   cells.add(myco);
+       // }
+        // repeated tower shape
+        else if (col == 16 && (row == 0 || row == 1 || row == 2)) {
+            cells.add(myco);
+        }
+        //death shape
+        else if ( (row == 5 && col==5) || (row==6 && col==6) || (row==7 && col==7) ) {
+            cells.add(myco);
+        }
+        
+        else if ( row >10 && rand.nextDouble() <= MYCOPLASMA_ALIVE_PROB) {
+            cells.add(myco);
+          }
+        else {
+            myco.setDead();
+            cells.add(myco);
+        }
+    }
+}
+
+}
 
     /**
      * Pause for a given time.
      * @param millisec  The time to pause for, in milliseconds
      */
-    public void delay(int millisec) {
+public void delay(int millisec) 
+{
         try {
             Thread.sleep(millisec);
         }

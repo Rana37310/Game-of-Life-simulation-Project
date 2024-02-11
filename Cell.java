@@ -23,7 +23,7 @@ public abstract class Cell {
      */
     public Cell(Field field, Location location, Color col) {
         alive = true;
-        nextAlive = false;
+        nextAlive = true;
         this.field = field;
         setLocation(location);
         setColor(col);
