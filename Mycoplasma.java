@@ -25,6 +25,7 @@ public class Mycoplasma extends Cell {
         super(field, location, col);
     }
 
+
     /**
     * This is how the Mycoplasma decides if it's alive or not
     */

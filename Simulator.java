@@ -19,6 +19,7 @@ public class Simulator {
     private List<Cell> cells;
     private Field field;
     private int generation;
+    //private List<Cell> shape 
 
     /**
      * Construct a simulation field with default size.
@@ -70,7 +71,7 @@ public class Simulator {
     {
       Random rand = Randomizer.getRandom();
       field.clear();
-      /*for (int row = 0; row < field.getDepth(); row++) {
+   /*   for (int row = 0; row < field.getDepth(); row++) {
         for (int col = 0; col < field.getWidth(); col++) {
           Location location = new Location(row, col);
           Mycoplasma myco = new Mycoplasma(field, location, Color.ORANGE);
@@ -81,10 +82,11 @@ public class Simulator {
             myco.setDead();
             cells.add(myco);
           }
-       */   
+         
       //stable shapes
       /*
       //****
+      shape.repated();
         for (int row = 0; row < field.getDepth(); row++) {
          for (int col = 0; col < field.getWidth(); col++) 
          {
@@ -140,39 +142,69 @@ public class Simulator {
         
         */
        
+       //
+     Random r = new Random();
+     int randomRow = r.nextInt(field.getDepth());
+     int randomCol = r.nextInt(field.getWidth()-3);
+
+      List<Cell>  mycoList=GenerateMycoplasma(); //
+     // Location location = new Location(0, 1);
+        
+     
+    
+        // stable train
+        int count=0;
+          for (int i = 0; i < mycoList.size(); i++) {
+           Location  location = new Location(randomRow, randomCol+count);
+             field.clear( mycoList.get(i).getLocation());
+            mycoList.get(i).setLocation(location);
+            cells.add(mycoList.get(i));
+           count++;
+        if(count==4)
+        {
+        randomRow = r.nextInt(field.getDepth());
+        randomCol = r.nextInt(field.getWidth()-3);
+        count=0;
+        }
        
-       for (int row = 0; row < field.getDepth(); row++) {
-    for (int col = 0; col < field.getWidth(); col++) {
+      /*    else {
+            myco.setDead();
+            cells.add(myco);
+        }
+        */
+    }
+    
+      
+}
+
+public List<Cell>  GenerateMycoplasma()
+{
+    Location location = new Location(0, 1);
+    List<Cell>  mycoList= new ArrayList<>();
+    for(int i =0 ; i<16 ; i++)
+    {  
+        mycoList.add( new Mycoplasma(field, location , Color.ORANGE)) ;
+    }
+     return mycoList;
+}
+/*
+public  void rpeatedShape()
+{
+    Random r = new Random();
+    int randomRow = r.nextInt(field.getDepth()+1);//1
+    
+    for (int col = 0; col < field.getWidth(); col++) 
+    {
         Location location = new Location(row, col);
         Mycoplasma myco = new Mycoplasma(field, location, Color.ORANGE);
 
         // stable train
-        if (row == 2 && (col == 3 || col == 4 || col == 5 || col == 6)) {
-            cells.add(myco);
-        }
-        // repeated mashroom shape
-      //  else if (row == 5 && col == 4 || row == 6 && (col == 3 || col == 4 || col == 5)) {
-         //   cells.add(myco);
-       // }
-        // repeated tower shape
-        else if (col == 16 && (row == 0 || row == 1 || row == 2)) {
-            cells.add(myco);
-        }
-        //death shape
-        else if ( (row == 5 && col==5) || (row==6 && col==6) || (row==7 && col==7) ) {
-            cells.add(myco);
-        }
-        
-        else if ( row >10 && rand.nextDouble() <= MYCOPLASMA_ALIVE_PROB) {
-            cells.add(myco);
-          }
-        else {
-            myco.setDead();
+        if (row == 0 && (col == 3 || col == 4 || col == 5 || col == 6)) {
             cells.add(myco);
         }
     }
-}
-
+    
+    
 }
 
     /**
