@@ -143,29 +143,39 @@ public class Simulator {
         */
        
        //
+     
+       for (int row = 0; row < field.getDepth(); row++) {
+        for (int col = 0; col < field.getWidth(); col++) {
+          Location location = new Location(row, col);
+          Mycoplasma myco = new Mycoplasma(field, location, Color.ORANGE);
+          if (row >10 && rand.nextDouble() <= MYCOPLASMA_ALIVE_PROB) {
+            cells.add(myco);
+          }
+          else {
+            myco.setDead();
+            cells.add(myco);
+          }
+        }
+    }
+    
      Random r = new Random();
      int randomRow = r.nextInt(field.getDepth());
      int randomCol = r.nextInt(field.getWidth()-3);
 
-      List<Cell>  mycoList=GenerateMycoplasma(); //
+      List<Cell>  mycoList=GenerateMycoplasma(7); //
      // Location location = new Location(0, 1);
         
      
     
         // stable train
-        int count=0;
-          for (int i = 0; i < mycoList.size(); i++) {
-           Location  location = new Location(randomRow, randomCol+count);
-             field.clear( mycoList.get(i).getLocation());
-            mycoList.get(i).setLocation(location);
+
+          for (int i = 0; i < mycoList.size() ; i++) {
+           
+           
             cells.add(mycoList.get(i));
-           count++;
-        if(count==4)
-        {
-        randomRow = r.nextInt(field.getDepth());
-        randomCol = r.nextInt(field.getWidth()-3);
-        count=0;
-        }
+          
+        
+        
        
       /*    else {
             myco.setDead();
@@ -177,16 +187,30 @@ public class Simulator {
       
 }
 
-public List<Cell>  GenerateMycoplasma()
+public List<Cell>  GenerateMycoplasma(int num)
 {
-    Location location = new Location(0, 1);
+    int count=0;
+    Random r = new Random();
+     int randomRow = r.nextInt(field.getDepth());
+     int randomCol = r.nextInt(field.getWidth()-3);
+     
     List<Cell>  mycoList= new ArrayList<>();
-    for(int i =0 ; i<16 ; i++)
-    {  
-        mycoList.add( new Mycoplasma(field, location , Color.ORANGE)) ;
+    for(int i =0 ; i<4*num ; i++)
+    {  Location  location = new Location(randomRow, randomCol+count);
+        mycoList.add( new Mycoplasma(field, location , Color.AQUA)) ;
+        count++;
+        if(count==4)
+        {
+        randomRow = r.nextInt(field.getDepth());
+        randomCol = r.nextInt(field.getWidth()-3);
+        count=0;
+        }
     }
      return mycoList;
 }
+
+
+
 /*
 public  void rpeatedShape()
 {
