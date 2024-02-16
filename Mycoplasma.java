@@ -30,6 +30,8 @@ public class Mycoplasma extends Cell {
     * This is how the Mycoplasma decides if it's alive or not
     */
     public void act() {
+        if(getField().getLivingNeighbours(getLocation()) !=null)
+        {
         List<Cell> neighbours = getField().getLivingNeighbours(getLocation());
         setNextState(false);// recheck its line position 
     
@@ -44,15 +46,15 @@ public class Mycoplasma extends Cell {
         }
         int rows= this.getField().getDepth();
         int cols= this.getField().getWidth();
-        
-        
+    } 
+        /*
         if( this.getLocation().getRow()==rows-1|| this.getLocation().getRow()==0)
             setColor(Color.RED);
             
          if( this.getLocation().getCol()==0 || this.getLocation().getCol()==cols-1)
             setColor(Color.DARKORCHID);
             
-    
+    */
         
       //  if ( this.getLocation().getRow()<10)
       //  {

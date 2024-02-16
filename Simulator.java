@@ -143,26 +143,81 @@ public class Simulator {
         */
        
        //
-     
+       
+    
+        
+          /*
+           *
        for (int row = 0; row < field.getDepth(); row++) {
         for (int col = 0; col < field.getWidth(); col++) {
           Location location = new Location(row, col);
           Mycoplasma myco = new Mycoplasma(field, location, Color.ORANGE);
+           Purple myPur = new Purple(field, location, Color.DARKORCHID);
+           
+           
+           List <Cell>  a = new ArrayList<>();
+             a.add(new Mycoplasma(field, location, Color.ORANGE));
+             a.add(new Purple(field, location, Color.DARKORCHID));
+          
           if (row >10 && rand.nextDouble() <= MYCOPLASMA_ALIVE_PROB) {
+              
             cells.add(myco);
-          }
-          else {
+          } 
+           else {
             myco.setDead();
             cells.add(myco);
           }
+            
+         if ( rand.nextDouble() > MYCOPLASMA_ALIVE_PROB && rand.nextDouble() > 0.5)
+          {
+             
+            cells.add(myPur);
+          }
+           else {
+            myPur.setDead();
+            cells.add(myPur);
+          }
+          
         }
     }
+    */
+  for (int row = 0; row < field.getDepth(); row++) {
+    for (int col = 0; col < field.getWidth(); col++) {
+        Location location = new Location(row, col);
+        
+            
+            double random = rand.nextDouble();
+            Purple myPur = new Purple(field, location, Color.DARKORCHID);
+            
+            location=field.randomAdjacentLocation(location);
+            
+            Mycoplasma myco = new Mycoplasma(field, location, Color.ORANGE);
+           
+            
+            if (random == 0.20) {
+                cells.add(myPur);
+            } else if (random >= 0.20 && random<0.30)  {
+
+                cells.add(myco);
+            }
+             else {
+                myco.setDead();
+                cells.add(myco);
+                myPur.setDead();
+                 cells.add(myPur);
+                 
+            }
+            
+        }
+    }
+
+
     
      Random r = new Random();
      int randomRow = r.nextInt(field.getDepth());
      int randomCol = r.nextInt(field.getWidth()-3);
 
-      List<Cell>  mycoList=GenerateMycoplasma(7); //
+      List<Cell>  mycoList=GenerateMycoplasma(0); //
      // Location location = new Location(0, 1);
         
      
@@ -182,6 +237,7 @@ public class Simulator {
             cells.add(myco);
         }
         */
+       
     }
     
       
