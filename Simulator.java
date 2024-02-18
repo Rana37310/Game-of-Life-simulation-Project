@@ -79,7 +79,7 @@ public class Simulator {
           else {
             myco.setDead();
             cells.add(myco);
-            //6789
+            //another comment
           }
         }
       }
