@@ -78,6 +78,11 @@ public class Simulator {
           location = field.randomAdjacentLocation(location);
           Spiral spir = new Spiral(field, location, Color.GREEN);
           
+          location = field.randomAdjacentLocation(location);
+          Purple myPur = new Purple(field, location, Color.DARKORCHID);
+          
+
+          
           double random = rand.nextDouble();
           
           if (random <= MYCOPLASMA_ALIVE_PROB) { // r< 0.25
@@ -87,7 +92,19 @@ public class Simulator {
             myco.setDead();
             cells.add(myco);
           }
-          if(random < .75 && random > .5 )   // 0.5< rand <= 0.75
+          
+          if (random > 0.25 && random <=0.5 )  { 
+
+                cells.add(myPur);
+            }
+             else {
+              
+                myPur.setDead();
+                 cells.add(myPur);
+                 
+            }
+          
+          if(random > .5 && random < .75)   // 0.5< rand <= 0.75
           {
              cells.add(spir); 
           }
@@ -96,6 +113,22 @@ public class Simulator {
             cells.add(spir);
           }
         }
+        
+        /*
+         * if (row > 10 && rand.nextDouble() <= MYCOPLASMA_ALIVE_PROB) {
+                Mycoplasma myco = new Mycoplasma(field, location, Color.ORANGE);
+                cells.add(myco);
+            } else if (rand.nextDouble() <= 0.75 && rand.nextDouble() > 0.5) {
+                Spir spir = new Spir(field, location, Color.GREEN);
+                cells.add(spir);
+            } else {
+                Spir spir = new Spir(field, location, Color.BLUE);
+                spir.setDead();
+                cells.add(spir);
+            }
+        }
+         */
+        
     }
     }
 

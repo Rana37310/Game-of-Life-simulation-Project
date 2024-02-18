@@ -29,7 +29,11 @@ public class Mycoplasma extends Cell {
     public void act() {
         List<Cell> neighbours = getField().getLivingNeighbours(getLocation());
         setNextState(false);// recheck its line position 
-    
+        
+        if(isAlive() && isBrown(getColor()))
+        {
+           setNextState(false);
+        }
         if (isAlive()) {
             if (neighbours.size()==2||neighbours.size()==3)
                 setNextState(true);
@@ -40,5 +44,25 @@ public class Mycoplasma extends Cell {
                 setNextState(true);
         }
         
+        for (int i=0 ;i<neighbours.size(); i++)
+        {
+            Cell c = neighbours.get(i);
+            if(c instanceof Spiral)
+            {
+                setNextState(true);
+                c.setNextState(true);
+            }
+            
+            if(c instanceof Purple)
+            {
+                setNextState(false);
+                c.setNextState(true);
+            }
+            
+            
+        }
+        
     }
+    
+    
 }

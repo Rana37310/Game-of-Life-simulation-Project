@@ -102,4 +102,11 @@ public abstract class Cell {
     protected Field getField() {
         return field;
     }
+    
+    protected boolean isBrown(Color c)
+    {
+        if(c.equals(Color.RED))
+           return true;
+        return false;
+    }
 }
