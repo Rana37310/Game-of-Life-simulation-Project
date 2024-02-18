@@ -16,6 +16,7 @@ import java.util.Random;
 public class Simulator {
 
     private static final double MYCOPLASMA_ALIVE_PROB = .25;
+    private static final double PURPLE_ALIVE_PROB = .5;
     private List<Cell> cells;
     private Field field;
     private int generation;
@@ -194,15 +195,22 @@ public class Simulator {
             Mycoplasma myco = new Mycoplasma(field, location, Color.ORANGE);
            
             
-            if (random == 0.20) {
-                cells.add(myPur);
-            } else if (random >= 0.20 && random<0.30)  {
-
+            if (random <= 0.25) {
+                cells.add(myco);
+            } 
+            else
+            {
+                  myco.setDead();
                 cells.add(myco);
             }
+            
+            
+          if (random > 0.25 && random <=0.5 )  {
+
+                cells.add(myPur);
+            }
              else {
-                myco.setDead();
-                cells.add(myco);
+              
                 myPur.setDead();
                  cells.add(myPur);
                  

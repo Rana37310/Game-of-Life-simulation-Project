@@ -21,6 +21,7 @@ public class Purple extends Cell
     
     public void act()
     {
+        /*
         if(getField().getLivingNeighbours(getLocation()) !=null)
         {
            List<Cell> neighbours = getField().getLivingNeighbours(getLocation());
@@ -36,6 +37,42 @@ public class Purple extends Cell
                 //setColor(Color.GREEN);
         }
     }
+    */
+     if(getField().getLivingNeighbours(getLocation()) !=null)
+        {
+        List<Cell> neighbours = getField().getLivingNeighbours(getLocation());
+       // neighbours=getPurpleNeighbours(neighbours);
+        setNextState(false);// recheck its line position 
+    
+        if (isAlive()) {
+            if (neighbours.size()==2||neighbours.size()==3)
+                setNextState(true);
+        }
+        
+        if (!isAlive()&& neighbours.size()==3) {
+                setNextState(true);
+                //setColor(Color.GREEN);
+        }
+        
+    }  
+    }
+    
+    
+    
+    
+    public List<Cell> getPurpleNeighbours(  List<Cell> neighbours)
+    {
+        
+        for( int i=0; i<neighbours.size() ;i++)
+        {
+           Cell cell = neighbours.get(i);
+            if (!(cell instanceof Mycoplasma)) 
+            {
+            neighbours.remove(cell);
+        }
+            
+        }
+        return neighbours;
         
     }
     /**
