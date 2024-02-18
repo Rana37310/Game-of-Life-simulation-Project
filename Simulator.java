@@ -71,18 +71,32 @@ public class Simulator {
       field.clear();
       for (int row = 0; row < field.getDepth(); row++) {
         for (int col = 0; col < field.getWidth(); col++) {
+            
           Location location = new Location(row, col);
           Mycoplasma myco = new Mycoplasma(field, location, Color.ORANGE);
-          if (rand.nextDouble() <= MYCOPLASMA_ALIVE_PROB) {
+          
+          location = field.randomAdjacentLocation(location);
+          Spiral spir = new Spiral(field, location, Color.GREEN);
+          
+          double random = rand.nextDouble();
+          
+          if (random <= MYCOPLASMA_ALIVE_PROB) { // r< 0.25
             cells.add(myco);
           }
           else {
             myco.setDead();
             cells.add(myco);
-            //another comment
+          }
+          if(random < .75 && random > .5 )   // 0.5< rand <= 0.75
+          {
+             cells.add(spir); 
+          }
+          else {
+            spir.setDead();
+            cells.add(spir);
           }
         }
-      }
+    }
     }
 
     /**
