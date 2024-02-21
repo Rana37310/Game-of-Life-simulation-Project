@@ -30,27 +30,35 @@ public class Purple extends Cell
         {
            setNextState(false);
         }
-        if (isAlive()) {
-            if (neighbours.size()==1||neighbours.size()==2)
-                setNextState(true);
+        
+        else
+        {
+             if (isAlive() && neighbours.size()==1||neighbours.size()==2) 
+        {
+                 setNextState(true);
+                setColor(Color.DARKORCHID);
         }
         
-        if (!isAlive()&& neighbours.size()==2) {
-                setNextState(true);
+        if (!isAlive()&& neighbours.size()==2) 
+            {
+                 setNextState(true);
+                setColor(Color.DARKORCHID);
+            }
         }
+       
         
        for (int i=0 ;i<neighbours.size(); i++)
         {
             Cell c = neighbours.get(i);
             if(c instanceof Mycoplasma)
             {
+                //setColor(Color.RED);
                 setNextState(true);
                 c.setNextState(false);
             }
             
             if(c instanceof Spiral)
             {
-               //setColor(Color.RED);
                 setNextState(false);
                 c.setNextState(false);
             }
@@ -66,7 +74,7 @@ public class Purple extends Cell
             if (!(cell instanceof Mycoplasma)) 
             {
             neighbours.remove(cell);
-        }
+            }
             
         }
         return neighbours;

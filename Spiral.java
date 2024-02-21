@@ -27,16 +27,22 @@ public class Spiral extends Cell
         /*
          * 
          */
-        if (isAlive()) {
-            if (neighbours.size() < 7 && neighbours.size()%2==0)   //even
-                setNextState(true);
+        else
+        {
+            if (isAlive() && neighbours.size() < 7 && neighbours.size()%2==0 ) //even
+        {   
+                 setNextState(true);
                 setColor(Color.GREEN);
+                //return the color to its original
         }
         
-        if (!isAlive() && neighbours.size() < 7 && neighbours.size()%2==1) {  //odd and dead
+        if (!isAlive() && neighbours.size() < 7 && neighbours.size()%2==1) 
+        {  //odd and dead
                 setNextState(true);
                 setColor(Color.GREEN);
         }
+        }
+        
         
         /*
          * 
@@ -53,7 +59,7 @@ public class Spiral extends Cell
             
             if(c instanceof Purple)
             {
-               setColor(Color.RED);
+               //setColor(Color.RED);
                 setNextState(false);
                 c.setNextState(false);
             }
