@@ -45,6 +45,8 @@ public class Mycoplasma extends Cell {
                 //setColor(Color.GREEN);
         }
         
+
+        
        
     } 
     

@@ -21,40 +21,32 @@ public class Purple extends Cell
     
     public void act()
     {
-        /*
-        if(getField().getLivingNeighbours(getLocation()) !=null)
-        {
-           List<Cell> neighbours = getField().getLivingNeighbours(getLocation());
+        
+
+           List<Cell> neighbours =getField().getLivingNeighbours(getLocation());
         setNextState(false);// recheck its line position 
-    
+    /*
         if (isAlive()) {
-            if (neighbours.size()<=1||neighbours.size()==5)
+            if (neighbours.size()<=7)
+                setNextState(true);
+        }
+        
+        if (!isAlive()&& neighbours.size()<3) {
+                setNextState(true);
+                //setColor(Color.GREEN);
+        }
+    */
+    
+   
+        if (isAlive()) {
+            if (neighbours.size()==1||neighbours.size()==2)
                 setNextState(true);
         }
         
         if (!isAlive()&& neighbours.size()==2) {
                 setNextState(true);
-                //setColor(Color.GREEN);
         }
-    }
-    */
-     if(getField().getLivingNeighbours(getLocation()) !=null)
-        {
-        List<Cell> neighbours = getField().getLivingNeighbours(getLocation());
-       // neighbours=getPurpleNeighbours(neighbours);
-        setNextState(false);// recheck its line position 
-    
-        if (isAlive()) {
-            if (neighbours.size()==2||neighbours.size()==3)
-                setNextState(true);
-        }
-        
-        if (!isAlive()&& neighbours.size()==3) {
-                setNextState(true);
-                //setColor(Color.GREEN);
-        }
-        
-    }  
+
     }
     
     
