@@ -104,7 +104,7 @@ public class Simulator {
                  
             }
           
-          if(random > .5 && random < .75)   // 0.5< rand <= 0.75
+              if(random > .5 && random < .75)   // 0.5< rand <= 0.75
           {
              cells.add(spir); 
           }
@@ -114,6 +114,9 @@ public class Simulator {
           }
         }
         
+        
+        
+        //SHAP
         /*
          * if (row > 10 && rand.nextDouble() <= MYCOPLASMA_ALIVE_PROB) {
                 Mycoplasma myco = new Mycoplasma(field, location, Color.ORANGE);
@@ -129,7 +132,7 @@ public class Simulator {
         }
          */
         
-    }
+        }
     }
 
     /**

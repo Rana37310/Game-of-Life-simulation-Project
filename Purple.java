@@ -26,7 +26,51 @@ public class Purple extends Cell
         List<Cell> neighbours = getField().getLivingNeighbours(getLocation());
        // neighbours=getPurpleNeighbours(neighbours);
         setNextState(false);// recheck its line position 
-        if(isAlive() && isBrown(getColor()))
+        
+        for (Cell neighbor : neighbours)
+        {
+            
+            if (neighbor instanceof Mycoplasma) 
+        {
+            setNextState(false);
+        }
+        else
+        {
+            if (isAlive() && neighbours.size()==1||neighbours.size()==2) 
+        {
+                 setNextState(true);
+                setColor(Color.DARKORCHID);
+        }
+        
+        if (!isAlive()&& neighbours.size()==2) 
+            {
+                 setNextState(true);
+                setColor(Color.DARKORCHID);
+            }
+        }
+            
+             
+        
+        
+    
+    
+    /*
+     * if (neighbor instanceof Mycoplasma)
+    {
+        setNextState(true); // Set current cell to alive
+        neighbor.setNextState(false);
+    }
+    
+    else if (neighbor instanceof Spiral) 
+    {
+        setNextState(false); // Keep current cell dead
+        neighbor.setNextState(false);
+    }
+       
+    }
+    
+    
+     if(isAlive() && isBrown(getColor()))
         {
            setNextState(false);
         }
@@ -45,25 +89,30 @@ public class Purple extends Cell
                 setColor(Color.DARKORCHID);
             }
         }
+     */
        
-        
-       for (int i=0 ;i<neighbours.size(); i++)
+       
+       
+        /*
+         * for (int i=0 ;i<neighbours.size(); i++)
         {
             Cell c = neighbours.get(i);
             if(c instanceof Mycoplasma)
             {
                 //setColor(Color.RED);
-                setNextState(true);
-                c.setNextState(false);
+                setNextState(true);   //false
+                //c.setNextState(false); //true
             }
             
             if(c instanceof Spiral)
             {
                 setNextState(false);
-                c.setNextState(false);
+               // c.setNextState(false);
             }
          } 
-    }
+         */
+        
+    }}
     
     public List<Cell> getPurpleNeighbours(  List<Cell> neighbours)
     {

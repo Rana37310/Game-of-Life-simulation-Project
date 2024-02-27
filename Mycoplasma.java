@@ -30,7 +30,34 @@ public class Mycoplasma extends Cell {
         List<Cell> neighbours = getField().getLivingNeighbours(getLocation());
         setNextState(false);// recheck its line position 
         
-        if(isAlive() && isBrown(getColor()))
+        
+        for (Cell neighbor : neighbours)
+        {
+        /*    
+         if (neighbor instanceof Purple) 
+        {
+            setNextState(false);
+        }
+        */
+       
+        {
+            if (isAlive() && neighbours.size()==2||neighbours.size()==3) 
+        {
+                 setNextState(true);
+                setColor(Color.ORANGE);
+        }
+        
+        if (!isAlive()&& neighbours.size()==3) 
+            {
+                 setNextState(true);
+                setColor(Color.ORANGE);
+            }
+        }
+            
+    }
+        
+    /*
+     *  if(isAlive() && isBrown(getColor()))
         {
            setNextState(false);
         }
@@ -48,23 +75,41 @@ public class Mycoplasma extends Cell {
         }
         
         
-        for (int i=0 ;i<neighbours.size(); i++)
+        if (neighbor instanceof Spiral)
+    {
+        setNextState(true); // Set current cell to alive
+        neighbor.setNextState(true);
+    }
+    else if (neighbor instanceof Purple) 
+    {
+        setNextState(false); // Keep current cell dead
+        neighbor.setNextState(true);
+    }
+     */
+       
+        
+        /*
+         * for (int i=0 ;i<neighbours.size(); i++)
         {
             Cell c = neighbours.get(i);
             if(c instanceof Spiral)
             {
                 setNextState(true);
-                c.setNextState(true);
+                //c.setNextState(true);
             }
             
             if(c instanceof Purple)
             {
-                setNextState(false);
-                c.setNextState(true);
+                setNextState(false); //false
+                //c.setNextState(true); //true
             }
             
             
         }
+         */
+        
+        
+        
         
     }
     

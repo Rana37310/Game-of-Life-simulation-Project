@@ -18,6 +18,44 @@ public class Spiral extends Cell
         List<Cell> neighbours = getField().getLivingNeighbours(getLocation());
         setNextState(false);// recheck its line position 
         
+        for (Cell neighbor : neighbours)
+        {
+            
+        if (neighbor instanceof Purple) 
+        {
+            setNextState(false);
+        }
+        else
+        {
+           if (isAlive() && neighbours.size() < 7 && neighbours.size()%2==0) //even
+        {
+                 setNextState(true);
+                setColor(Color.GREEN);
+        }
+        
+        if (!isAlive() && neighbours.size() < 7 && neighbours.size()%2==1) //odd
+            {
+                 setNextState(true);
+                setColor(Color.GREEN);
+            } 
+        }
+            
+    }
+       
+    /*
+     *  for (Cell neighbor : neighbours)
+        {
+    if (neighbor instanceof Mycoplasma)
+    {
+        setNextState(true); // Set current cell to alive
+        neighbor.setNextState(true);
+    } 
+    else if (neighbor instanceof Purple) 
+    {
+        setNextState(false); // Keep current cell dead
+        neighbor.setNextState(false);
+    }
+       }
         
         if(isAlive() && isBrown(getColor()))
         {
@@ -26,7 +64,7 @@ public class Spiral extends Cell
         
         /*
          * 
-         */
+         
         else
         {
             if (isAlive() && neighbours.size() < 7 && neighbours.size()%2==0 ) //even
@@ -42,31 +80,38 @@ public class Spiral extends Cell
                 setColor(Color.GREEN);
         }
         }
+     
+       
         
         
         /*
          * 
-         */
-        
-        for (int i=0 ;i<neighbours.size(); i++)
+            
+            for (int i=0 ;i<neighbours.size(); i++)
         {
             Cell c = neighbours.get(i);
             if(c instanceof Mycoplasma)
             {
                 setNextState(true);
-                c.setNextState(true);
+               // c.setNextState(true);
             }
             
             if(c instanceof Purple)
             {
                //setColor(Color.RED);
                 setNextState(false);
-                c.setNextState(false);
+                //c.setNextState(false);
             }
             
             
         }
+       
+    
+        
+         */
         
         
+        
+    }  
     }
-}
+
