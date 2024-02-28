@@ -13,16 +13,26 @@ import java.util.Random;
  * @version 2024.02.03
  */
 
-public class Simulator {
+public  abstract class  Simulator {
 
-    private static final double MYCOPLASMA_ALIVE_PROB = 0.25;
-    private List<Cell> cells;
-    private Field field;
-    private int generation;
+    protected static final double MYCOPLASMA_ALIVE_PROB = .25;
+    protected static final double PURPLE_ALIVE_PROB = .5;
+    protected List<Cell> cells;
+    protected Field field;
+    protected int generation;
+    //private List<Cell> shape 
 
     /**
      * Construct a simulation field with default size.
      */
+    
+      public Simulator(int depth, int width) {
+        cells = new ArrayList<>();
+        field = new Field(depth, width);
+        ///change
+        reset();
+    }
+
     public Simulator() {
         this(SimulatorView.GRID_HEIGHT, SimulatorView.GRID_WIDTH);
     }
@@ -32,12 +42,7 @@ public class Simulator {
      * @param depth Depth of the field. Must be greater than zero.
      * @param width Width of the field. Must be greater than zero.
      */
-    public Simulator(int depth, int width) {
-        cells = new ArrayList<>();
-        field = new Field(depth, width);
-        reset();
-    }
-
+  
     /**
      * Run the simulation from its current state for a single generation.
      * Iterate over the whole field updating the state of each life form.
@@ -57,38 +62,41 @@ public class Simulator {
     /**
      * Reset the simulation to a starting position.
      */
-    public void reset() {
-        generation = 0;
-        cells.clear();
-        populate();
-    }
+    public abstract void reset() ;
 
     /**
      * Randomly populate the field live/dead life forms
      */
-    private void populate() {
-      Random rand = Randomizer.getRandom();
-      field.clear();
-      for (int row = 0; row < field.getDepth(); row++) {
-        for (int col = 0; col < field.getWidth(); col++) {
-          Location location = new Location(row, col);
-          Mycoplasma myco = new Mycoplasma(field, location, Color.ORANGE);
-          if (rand.nextDouble() <= MYCOPLASMA_ALIVE_PROB) {
+
+  protected abstract void populate() ;
+
+
+/*
+public  void rpeatedShape()
+{
+    Random r = new Random();
+    int randomRow = r.nextInt(field.getDepth()+1);//1
+    
+    for (int col = 0; col < field.getWidth(); col++) 
+    {
+        Location location = new Location(row, col);
+        Mycoplasma myco = new Mycoplasma(field, location, Color.ORANGE);
+
+        // stable train
+        if (row == 0 && (col == 3 || col == 4 || col == 5 || col == 6)) {
             cells.add(myco);
-          }
-          else {
-            myco.setDead();
-            cells.add(myco);
-          }
         }
-      }
     }
+    
+    
+}
 
     /**
      * Pause for a given time.
      * @param millisec  The time to pause for, in milliseconds
      */
-    public void delay(int millisec) {
+public void delay(int millisec) 
+{
         try {
             Thread.sleep(millisec);
         }

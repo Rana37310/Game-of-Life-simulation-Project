@@ -7,6 +7,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color; 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.Pane;
+import javafx.geometry.Insets;
+import javafx.scene.control.TextInputDialog;
+import java.util.Optional;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+
 
 /**
  * A graphical view of the simulation grid. The view displays a rectangle for
@@ -19,8 +29,8 @@ import javafx.stage.Stage;
 
 public class SimulatorView extends Application {
 
-    public static final int GRID_WIDTH = 100;
-    public static final int GRID_HEIGHT = 80;    
+    public static final int GRID_WIDTH = 20;
+    public static final int GRID_HEIGHT = 20;    
     public static final int WIN_WIDTH = 650;
     public static final int WIN_HEIGHT = 650;
     
@@ -34,6 +44,7 @@ public class SimulatorView extends Application {
     private FieldCanvas fieldCanvas;
     private FieldStats stats;
     private Simulator simulator;
+     private final static String [] SHAPES_NAME= {"Bar", "Stair", "Diamond", "SpaceShip"};
 
     /**
      * Create a view of the given width and height.
@@ -42,41 +53,79 @@ public class SimulatorView extends Application {
      */
     @Override
     public void start(Stage stage) {
-                
-        stats = new FieldStats();
-        fieldCanvas = new FieldCanvas(WIN_WIDTH - 50, WIN_HEIGHT - 50);
-        fieldCanvas.setScale(GRID_HEIGHT, GRID_WIDTH); 
-        simulator = new Simulator();
+    stats = new FieldStats();
+    fieldCanvas = new FieldCanvas(WIN_WIDTH - 50, WIN_HEIGHT - 50);
+    fieldCanvas.setScale(GRID_HEIGHT, GRID_WIDTH); 
 
-        Group root = new Group();
-        
-        genLabel = new Label(GENERATION_PREFIX);
-        infoLabel = new Label("  ");
-        population = new Label(POPULATION_PREFIX);
+    Group root = new Group();
+    
+    genLabel = new Label(GENERATION_PREFIX);
+    infoLabel = new Label("  ");
+    population = new Label(POPULATION_PREFIX);
 
-        BorderPane bPane = new BorderPane(); 
-        HBox infoPane = new HBox();
-        HBox popPane = new HBox();
-        
+    BorderPane bPane = new BorderPane(); 
+    HBox infoPane = new HBox();
+    HBox popPane = new HBox();
+  
+    Button ShapeButton = new Button("Magic Shapes");
+    Button SymbiosisButton = new Button("Symbiosis");
+    
+     //actions
 
-        infoPane.setSpacing(10);
-        infoPane.getChildren().addAll(genLabel, infoLabel);       
-        popPane.getChildren().addAll(population); 
-        
-        bPane.setTop(infoPane);
-        bPane.setCenter(fieldCanvas);
-        bPane.setBottom(population);
-        
-        root.getChildren().add(bPane);
-        Scene scene = new Scene(root, WIN_WIDTH, WIN_HEIGHT); 
-        
-        stage.setScene(scene);          
-        stage.setTitle("Life Simulation");
-        updateCanvas(simulator.getGeneration(), simulator.getField());
-        
-        stage.show();     
-    }
+    
+    VBox button2Box = new VBox();
+    button2Box.getChildren().addAll(ShapeButton,SymbiosisButton);
+    button2Box.setSpacing(10); // Set spacing between buttons
 
+    // Create a new stage
+    Stage newStage = new Stage();
+    newStage.setTitle("Choose Simulator");
+
+    // Create a scene with the VBox containing button2
+    Scene button2Scene = new Scene(button2Box, 300, 100); // Set width and height as per your requirement
+
+    // Set the scene to the new stage
+    newStage.setScene(button2Scene);
+    newStage.show();
+
+    infoPane.setSpacing(10);
+    infoPane.getChildren().addAll(genLabel, infoLabel);       
+    popPane.getChildren().addAll(population); 
+    
+    bPane.setTop(infoPane);
+    bPane.setCenter(fieldCanvas);
+    bPane.setBottom(population);
+    
+    root.getChildren().add(bPane);
+    Scene scene = new Scene(root, WIN_WIDTH, WIN_HEIGHT); 
+    
+    stage.setScene(scene);          
+    stage.setTitle("Life Simulation");
+    
+    
+        ShapeButton.setOnAction(event -> {
+       Dialog ShapeDialog = new Dialog();
+     ShapeDialog.creatDialog(stage);
+     simulator = new Shape(ShapeDialog.getName(), ShapeDialog.getNumber());
+     updateCanvas(simulator.getGeneration(), simulator.getField());
+     stage.show();
+    });
+
+     SymbiosisButton.setOnAction(event -> {
+     simulator = new Symbiosis();
+     updateCanvas(simulator.getGeneration(), simulator.getField());
+     stage.show();      
+    });
+  
+    
+    
+   
+}
+
+   
+
+
+  
     /**
      * Display a short information label at the top of the window.
      */
