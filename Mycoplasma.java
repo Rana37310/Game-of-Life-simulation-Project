@@ -19,15 +19,20 @@ public class Mycoplasma extends Cell {
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
+    
+    
     public Mycoplasma(Field field, Location location, Color col) {
         super(field, location, col);
     }
+
 
     /**
     * This is how the Mycoplasma decides if it's alive or not
     */
     public void act() {
+        
         List<Cell> neighbours = getField().getLivingNeighbours(getLocation());
+       // neighbours=getMycoplasmaNeighbours(neighbours);
         setNextState(false);// recheck its line position 
     
         if (isAlive()) {
@@ -35,10 +40,45 @@ public class Mycoplasma extends Cell {
                 setNextState(true);
         }
         
-        if (!isAlive()) {
-            if (neighbours.size()==3)
+        if (!isAlive()&& neighbours.size()==3) {
                 setNextState(true);
+                //setColor(Color.GREEN);
         }
         
+
+        
+       
+    } 
+    
+    
+    public List<Cell> getMycoplasmaNeighbours(  List<Cell> neighbours)
+    {
+        
+        for( int i=0; i<neighbours.size() ;i++)
+        {
+           Cell cell = neighbours.get(i);
+            if (!(cell instanceof Mycoplasma)) 
+            {
+            neighbours.remove(cell);
+        }
+            
+        }
+        return neighbours;
+        
     }
+        /*
+        if( this.getLocation().getRow()==rows-1|| this.getLocation().getRow()==0)
+            setColor(Color.RED);
+            
+         if( this.getLocation().getCol()==0 || this.getLocation().getCol()==cols-1)
+            setColor(Color.DARKORCHID);
+            
+    */
+        
+      //  if ( this.getLocation().getRow()<10)
+      //  {
+     //       setNextState(false);
+      //  }
+        
+
 }

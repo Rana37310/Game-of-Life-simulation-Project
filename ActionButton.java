@@ -17,38 +17,24 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-public class Dialog {
+public class ActionButton {
     
-    private final static String [] SHAPES_NAME= {"Bar", "Diamond", "SpaceShip"};
-    private static Shape createdShape;
-    
-    private String ShapeName;
-    private int NumberOfShape;
-    private boolean CheckOkClick;
-    
-    
-    public Dialog()
-    {
-        ShapeName=SHAPES_NAME[0];
-        NumberOfShape=1;
-        CheckOkClick=false;
-    }
+      
 
-    public void creatDialog(Stage stage) {
-        
+    public  void ShapeAction(Stage stage,Simulator simulator) {
          // Create a GridPane to organize the components of the dialog window
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(20, 20, 20, 20));
         grid.setVgap(10);
         grid.setHgap(10);
-      
+
         // Add a Label for Shape Name
         Label shapeLabel = new Label("Shape Name:");
         grid.add(shapeLabel, 0, 0);
 
         // Create a ChoiceBox for selecting the shape name
         ChoiceBox<String> shapeChoiceBox = new ChoiceBox<>();
-       shapeChoiceBox.getItems().addAll(SHAPES_NAME);
+        shapeChoiceBox.getItems().addAll("Bar", "Stair", "Diamond", "SpaceShip");
         shapeChoiceBox.setValue("Bar"); // Default selection
         grid.add(shapeChoiceBox, 1, 0);
 
@@ -59,9 +45,6 @@ public class Dialog {
         // Create a TextField for entering the number of shapes
         TextField numberField = new TextField("1");
         grid.add(numberField, 1, 1);
-        
-         //default 
-        //createdShape =new Shape(1, "Bar"); 
 
         // Create the dialog stage
         Stage dialogStage = new Stage();
@@ -74,18 +57,21 @@ public class Dialog {
             try {
                 int number = Integer.parseInt(numberField.getText());
                 String shapeName = shapeChoiceBox.getValue();
-                
-                
+
+                // Create the shape with the provided number and shape name
+                simulator = new Shape(number, shapeName);
+                updateCanvas(simulator.getGeneration(), simulator.getField());
+                stage.show();
+                dialogStage.close();
             } catch (NumberFormatException ex) {
+                // Handle invalid number format
                 System.out.println("Invalid number format");
             }
         });
-        
 
-        
-         Button cancelButton = new Button("Cancel");
+        // Add Cancel button to close the dialog without action
+        Button cancelButton = new Button("Cancel");
         cancelButton.setOnAction(e -> dialogStage.close());
-       
 
         // Add buttons to a horizontal box
         HBox buttonBox = new HBox(10);
@@ -98,35 +84,7 @@ public class Dialog {
 
         // Show the dialog stage
         dialogStage.show();
-       
-       // return new String [] {getName(),getNumber()};
-    }
-    
-    public boolean IsOkClicked()
-    {
-        return CheckOkClick;
-    }
-    
-    public void setName(String name)
-    {
-        ShapeName=name;
-        
-    }
-    
-     public void setNumber(int number)
-    {
-        NumberOfShape=number;
-    }
-    
-     public String getName()
-    {
-        return ShapeName;
-        
-    }
-    
-     public int getNumber()
-    {
-        return NumberOfShape;
+
     }
 
 }

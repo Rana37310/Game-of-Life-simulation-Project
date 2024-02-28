@@ -53,9 +53,13 @@ public class SimulatorView extends Application {
      */
     @Override
     public void start(Stage stage) {
+
         // Choose Simulator
         // Show stage 
-   
+    GridPane grid = new GridPane();
+     grid.setPadding(new Insets(20, 20, 20, 20));
+     grid.setVgap(10);
+        grid.setHgap(10);
   
     Button ShapeButton = new Button("Magic Shapes");
     Button SymbiosisButton = new Button("Symbiosis");
@@ -86,7 +90,7 @@ public class SimulatorView extends Application {
      shapeDialog.creatDialog(stage);
      
      
-        //after the ok button clicked it should do the next three lines 
+        //Create ok button 
         //simulator = new shape...
         //Orignalstage
         
@@ -105,9 +109,10 @@ public class SimulatorView extends Application {
 
    public void Orignalstage(Stage stage,Simulator simulator )
    { 
-   stats = new FieldStats();
+    stats = new FieldStats();
         fieldCanvas = new FieldCanvas(WIN_WIDTH - 50, WIN_HEIGHT - 50);
         fieldCanvas.setScale(GRID_HEIGHT, GRID_WIDTH); 
+
         Group root = new Group();
         
         genLabel = new Label(GENERATION_PREFIX);
@@ -134,12 +139,18 @@ public class SimulatorView extends Application {
         stage.setTitle("Life Simulation");
         updateCanvas(simulator.getGeneration(), simulator.getField());
         
-        stage.show();     
-    }
+        stage.show();    
+   
+}
 
 
 
   
+
+
+
+  
+
     /**
      * Display a short information label at the top of the window.
      */
@@ -196,7 +207,7 @@ public class SimulatorView extends Application {
            
             for (int gen = 1; gen <= numGenerations; gen++) {
                 simulator.simOneGeneration();    
-                simulator.delay(500);
+                simulator.delay(2000);
                 Platform.runLater(() -> {
                     updateCanvas(simulator.getGeneration(), simulator.getField());
                 });

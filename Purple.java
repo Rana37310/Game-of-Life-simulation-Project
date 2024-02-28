@@ -87,3 +87,21 @@ public class Purple extends Cell
         return x + y;
     }
 }
+
+        
+
+           //List<Cell> neighbours =getField().getLivingNeighbours(getLocation());
+        //setNextState(false);// recheck its line position 
+    /*
+        if (isAlive()) {
+            if (neighbours.size()<=7)
+                setNextState(true);
+        }
+        
+        if (!isAlive()&& neighbours.size()<3) {
+                setNextState(true);
+                //setColor(Color.GREEN);
+        }
+    */
+    
+   
