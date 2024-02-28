@@ -9,10 +9,22 @@ import java.util.List;
  */
 public class Spiral extends Cell
 {
+    /**
+     * Create a new Spiral.
+     *
+     * @param field The field currently occupied.
+     * @param location The location within the field.
+     */
     public Spiral(Field field, Location location, Color col) {
         super(field, location, col);
     }
-
+    
+    
+    /**
+    * This is how the Spiral decides if it's alive or not
+    * If it encounters a Purple neighbor, it will die in next genration; 
+    * otherwise, it will follow its own life principle.
+    */
     public void act() {
         
         List<Cell> neighbours = getField().getLivingNeighbours(getLocation());
@@ -20,19 +32,30 @@ public class Spiral extends Cell
         
         for (Cell neighbor : neighbours)
         {
+        
             
-        if (neighbor instanceof Purple) 
+         if (neighbor instanceof Purple) 
         {
             setNextState(false);
         }
         else
+             
+        
         {
-           if (isAlive() && neighbours.size() < 7 && neighbours.size()%2==0) //even
-        {
+            /*
+             * if the cell has even number of neibougrs and the size
+             * is less than 7 it will live on next genration
+             */
+           if (isAlive() && neighbours.size() < 7 && neighbours.size()%2==0) 
+           {
                  setNextState(true);
                 setColor(Color.GREEN);
         }
         
+            /*
+             * if dead cell has odd number of neibougrs and the size
+             * is less than 7 it will live again on next genration
+             */
         if (!isAlive() && neighbours.size() < 7 && neighbours.size()%2==1) //odd
             {
                  setNextState(true);
@@ -40,78 +63,7 @@ public class Spiral extends Cell
             } 
         }
             
-    }
-       
-    /*
-     *  for (Cell neighbor : neighbours)
-        {
-    if (neighbor instanceof Mycoplasma)
-    {
-        setNextState(true); // Set current cell to alive
-        neighbor.setNextState(true);
-    } 
-    else if (neighbor instanceof Purple) 
-    {
-        setNextState(false); // Keep current cell dead
-        neighbor.setNextState(false);
-    }
-       }
-        
-        if(isAlive() && isBrown(getColor()))
-        {
-           setNextState(false);
-        }
-        
-        /*
-         * 
-         
-        else
-        {
-            if (isAlive() && neighbours.size() < 7 && neighbours.size()%2==0 ) //even
-        {   
-                 setNextState(true);
-                setColor(Color.GREEN);
-                //return the color to its original
-        }
-        
-        if (!isAlive() && neighbours.size() < 7 && neighbours.size()%2==1) 
-        {  //odd and dead
-                setNextState(true);
-                setColor(Color.GREEN);
-        }
-        }
-     
-       
-        
-        
-        /*
-         * 
-            
-            for (int i=0 ;i<neighbours.size(); i++)
-        {
-            Cell c = neighbours.get(i);
-            if(c instanceof Mycoplasma)
-            {
-                setNextState(true);
-               // c.setNextState(true);
-            }
-            
-            if(c instanceof Purple)
-            {
-               //setColor(Color.RED);
-                setNextState(false);
-                //c.setNextState(false);
-            }
-            
-            
-        }
-       
-    
-        
-         */
-        
-        
-        
+      }
     }  
     }
 

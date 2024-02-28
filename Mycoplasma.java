@@ -33,13 +33,17 @@ public class Mycoplasma extends Cell {
         
         for (Cell neighbor : neighbours)
         {
-        /*    
-         if (neighbor instanceof Purple) 
+         
+         if (neighbor instanceof Spiral) 
+        {
+            setNextState(true);
+            
+        }
+        else if(neighbor instanceof Purple)
         {
             setNextState(false);
         }
-        */
-       
+        else
         {
             if (isAlive() && neighbours.size()==2||neighbours.size()==3) 
         {
@@ -54,64 +58,6 @@ public class Mycoplasma extends Cell {
             }
         }
             
+       }
     }
-        
-    /*
-     *  if(isAlive() && isBrown(getColor()))
-        {
-           setNextState(false);
-        }
-        else
-        {
-           if (isAlive() && neighbours.size()==2||neighbours.size()==3) 
-           {
-                setNextState(true);
-        }
-        
-        if (!isAlive()) {
-            if (neighbours.size()==3)
-                setNextState(true);
-        } 
-        }
-        
-        
-        if (neighbor instanceof Spiral)
-    {
-        setNextState(true); // Set current cell to alive
-        neighbor.setNextState(true);
-    }
-    else if (neighbor instanceof Purple) 
-    {
-        setNextState(false); // Keep current cell dead
-        neighbor.setNextState(true);
-    }
-     */
-       
-        
-        /*
-         * for (int i=0 ;i<neighbours.size(); i++)
-        {
-            Cell c = neighbours.get(i);
-            if(c instanceof Spiral)
-            {
-                setNextState(true);
-                //c.setNextState(true);
-            }
-            
-            if(c instanceof Purple)
-            {
-                setNextState(false); //false
-                //c.setNextState(true); //true
-            }
-            
-            
-        }
-         */
-        
-        
-        
-        
-    }
-    
-    
 }

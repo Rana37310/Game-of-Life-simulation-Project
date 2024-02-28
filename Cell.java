@@ -102,11 +102,4 @@ public abstract class Cell {
     protected Field getField() {
         return field;
     }
-    
-    protected boolean isBrown(Color c)   //check if the cell is sick or not return true if sick 
-    {
-        if(c.equals(Color.RED))
-           return true;
-        return false;
-    }
 }

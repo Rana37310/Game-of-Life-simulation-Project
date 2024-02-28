@@ -8,136 +8,58 @@ import java.util.List;
  */
 public class Purple extends Cell
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
+    
     /**
-     * Constructor for objects of class Purple
+     * Create a new Purple.
+     *
+     * @param field The field currently occupied.
+     * @param location The location within the field.
      */
     public Purple(Field field, Location location, Color col) {
         super(field, location, col);
     }
 
     
+    /**
+    * This is how the Purple decides if it's alive or not
+    * If it encounters a Mycoplasma neighbor, it will die in next genration; 
+    * otherwise, it will follow its own life principle.
+    */
     public void act()
     {
-   
-     
         List<Cell> neighbours = getField().getLivingNeighbours(getLocation());
-       // neighbours=getPurpleNeighbours(neighbours);
         setNextState(false);// recheck its line position 
         
         for (Cell neighbor : neighbours)
         {
             
-            if (neighbor instanceof Mycoplasma) 
+        if (neighbor instanceof Spiral) 
         {
             setNextState(false);
-        }
-        else
-        {
-            if (isAlive() && neighbours.size()==1||neighbours.size()==2) 
-        {
-                 setNextState(true);
-                setColor(Color.DARKORCHID);
-        }
-        
-        if (!isAlive()&& neighbours.size()==2) 
-            {
-                 setNextState(true);
-                setColor(Color.DARKORCHID);
-            }
-        }
             
-             
-        
-        
-    
-    
-    /*
-     * if (neighbor instanceof Mycoplasma)
-    {
-        setNextState(true); // Set current cell to alive
-        neighbor.setNextState(false);
-    }
-    
-    else if (neighbor instanceof Spiral) 
-    {
-        setNextState(false); // Keep current cell dead
-        neighbor.setNextState(false);
-    }
-       
-    }
-    
-    
-     if(isAlive() && isBrown(getColor()))
-        {
-           setNextState(false);
         }
-        
         else
-        {
-             if (isAlive() && neighbours.size()==1||neighbours.size()==2) 
-        {
-                 setNextState(true);
-                setColor(Color.DARKORCHID);
-        }
-        
-        if (!isAlive()&& neighbours.size()==2) 
-            {
-                 setNextState(true);
-                setColor(Color.DARKORCHID);
-            }
-        }
-     */
-       
-       
-       
+        { 
         /*
-         * for (int i=0 ;i<neighbours.size(); i++)
-        {
-            Cell c = neighbours.get(i);
-            if(c instanceof Mycoplasma)
-            {
-                //setColor(Color.RED);
-                setNextState(true);   //false
-                //c.setNextState(false); //true
-            }
-            
-            if(c instanceof Spiral)
-            {
-                setNextState(false);
-               // c.setNextState(false);
-            }
-         } 
+         * if the cell has 2 or less 
+         * neighbours it live next generation
+         */
+            if (isAlive() && neighbours.size()==1||neighbours.size()==2) 
+          {
+                 setNextState(true);
+                setColor(Color.DARKORCHID);
+          }
+        /*
+         * if a dead cell has exactly 2 
+         * neighbours it lives next generation
          */
         
-    }}
-    
-    public List<Cell> getPurpleNeighbours(  List<Cell> neighbours)
-    {
-        
-        for( int i=0; i<neighbours.size() ;i++)
-        {
-           Cell cell = neighbours.get(i);
-            if (!(cell instanceof Mycoplasma)) 
+          if (!isAlive()&& neighbours.size()==2) 
             {
-            neighbours.remove(cell);
+                 setNextState(true);
+                setColor(Color.DARKORCHID);
             }
-            
         }
-        return neighbours;
-        
     }
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
-    }
+  }
 }
