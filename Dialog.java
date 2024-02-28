@@ -24,12 +24,14 @@ public class Dialog {
     
     private String ShapeName;
     private int NumberOfShape;
+    private boolean CheckOkClick;
     
     
     public Dialog()
     {
         ShapeName=SHAPES_NAME[0];
         NumberOfShape=1;
+        CheckOkClick=false;
     }
 
     public void creatDialog(Stage stage) {
@@ -72,15 +74,12 @@ public class Dialog {
             try {
                 int number = Integer.parseInt(numberField.getText());
                 String shapeName = shapeChoiceBox.getValue();
+                SimulatorView s = new SimulatorView();
                 //setNameNumber(shapeName, number);
                 setName(shapeName);
                 setNumber(number);
-
-                //Integer.parseInt()
-                // Create the shape with the provided number and shape name
-                //createdShape = new Shape(number, shapeName);
-                
-                
+               
+               
                 dialogStage.close();
                 
                 
@@ -111,7 +110,10 @@ public class Dialog {
        // return new String [] {getName(),getNumber()};
     }
     
-    
+    public boolean IsOkClicked()
+    {
+        return CheckOkClick;
+    }
     
     public void setName(String name)
     {

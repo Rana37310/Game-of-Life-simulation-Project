@@ -53,28 +53,19 @@ public class SimulatorView extends Application {
      */
     @Override
     public void start(Stage stage) {
-    stats = new FieldStats();
-    fieldCanvas = new FieldCanvas(WIN_WIDTH - 50, WIN_HEIGHT - 50);
-    fieldCanvas.setScale(GRID_HEIGHT, GRID_WIDTH); 
-
-    Group root = new Group();
-    
-    genLabel = new Label(GENERATION_PREFIX);
-    infoLabel = new Label("  ");
-    population = new Label(POPULATION_PREFIX);
-
-    BorderPane bPane = new BorderPane(); 
-    HBox infoPane = new HBox();
-    HBox popPane = new HBox();
+        // Choose Simulator
+        // Show stage 
+   
   
     Button ShapeButton = new Button("Magic Shapes");
     Button SymbiosisButton = new Button("Symbiosis");
+    Button okButton = new Button("OK");
     
      //actions
 
     
     VBox button2Box = new VBox();
-    button2Box.getChildren().addAll(ShapeButton,SymbiosisButton);
+    button2Box.getChildren().addAll(ShapeButton,SymbiosisButton,okButton);
     button2Box.setSpacing(10); // Set spacing between buttons
 
     // Create a new stage
@@ -86,44 +77,65 @@ public class SimulatorView extends Application {
 
     // Set the scene to the new stage
     newStage.setScene(button2Scene);
-    newStage.show();
-
-    infoPane.setSpacing(10);
-    infoPane.getChildren().addAll(genLabel, infoLabel);       
-    popPane.getChildren().addAll(population); 
-    
-    bPane.setTop(infoPane);
-    bPane.setCenter(fieldCanvas);
-    bPane.setBottom(population);
-    
-    root.getChildren().add(bPane);
-    Scene scene = new Scene(root, WIN_WIDTH, WIN_HEIGHT); 
-    
-    stage.setScene(scene);          
+    newStage.show();        
     stage.setTitle("Life Simulation");
     
     
         ShapeButton.setOnAction(event -> {
-       Dialog ShapeDialog = new Dialog();
-     ShapeDialog.creatDialog(stage);
-     simulator = new Shape(ShapeDialog.getName(), ShapeDialog.getNumber());
-     updateCanvas(simulator.getGeneration(), simulator.getField());
-     stage.show();
+     Dialog shapeDialog = new Dialog();
+     shapeDialog.creatDialog(stage);
+     
+     
+        //after the ok button clicked it should do the next three lines 
+        //simulator = new shape...
+        //Orignalstage
+  
      
     });
 
      SymbiosisButton.setOnAction(event -> {
      simulator = new Symbiosis();
-     updateCanvas(simulator.getGeneration(), simulator.getField());
-     stage.show();      
-    });
-  
-    
-    
+     //updateCanvas(simulator.getGeneration(), simulator.getField());
+     //stage.show();
+     Orignalstage(stage,simulator);
+    }); 
    
 }
 
-   
+   public void Orignalstage(Stage stage,Simulator simulator )
+   { 
+   stats = new FieldStats();
+        fieldCanvas = new FieldCanvas(WIN_WIDTH - 50, WIN_HEIGHT - 50);
+        fieldCanvas.setScale(GRID_HEIGHT, GRID_WIDTH); 
+        Group root = new Group();
+        
+        genLabel = new Label(GENERATION_PREFIX);
+        infoLabel = new Label("  ");
+        population = new Label(POPULATION_PREFIX);
+
+        BorderPane bPane = new BorderPane(); 
+        HBox infoPane = new HBox();
+        HBox popPane = new HBox();
+        
+
+        infoPane.setSpacing(10);
+        infoPane.getChildren().addAll(genLabel, infoLabel);       
+        popPane.getChildren().addAll(population); 
+        
+        bPane.setTop(infoPane);
+        bPane.setCenter(fieldCanvas);
+        bPane.setBottom(population);
+        
+        root.getChildren().add(bPane);
+        Scene scene = new Scene(root, WIN_WIDTH, WIN_HEIGHT); 
+        
+        stage.setScene(scene);          
+        stage.setTitle("Life Simulation");
+        updateCanvas(simulator.getGeneration(), simulator.getField());
+        
+        stage.show();     
+    }
+
 
 
   
@@ -160,6 +172,9 @@ public class SimulatorView extends Application {
         stats.countFinished();
         population.setText(POPULATION_PREFIX + stats.getPopulationDetails(field));
     }
+    
+    
+    
 
     /**
      * Determine whether the simulation should continue to run.

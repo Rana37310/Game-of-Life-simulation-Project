@@ -16,18 +16,13 @@ public class Symbiosis extends Simulator
     /**
      * Constructor for objects of class Symbiosis
      */
-    public Symbiosis(int depth, int width)
+    public Symbiosis()
     {
-         cells = new ArrayList<>();
-        field = new Field(depth, width);
-        ///change
-        reset();
+        super();
+         
     }
     
-       public Symbiosis()
-    {
-        this(SimulatorView.GRID_HEIGHT, SimulatorView.GRID_WIDTH);
-    }
+     
 
      public void reset() {
         generation = 0;

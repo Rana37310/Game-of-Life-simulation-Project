@@ -19,8 +19,11 @@ public class Shape extends Simulator
      */
     public Shape(String name, int number)
     {
+        super();
         numberShape=number;
-        shapeName=name;       
+        shapeName=name; 
+        //change??
+        reset();
     }
     
     public int getShapeNumber()
