@@ -109,6 +109,7 @@ public class SimulatorView extends Application {
      simulator = new Shape(ShapeDialog.getName(), ShapeDialog.getNumber());
      updateCanvas(simulator.getGeneration(), simulator.getField());
      stage.show();
+     
     });
 
      SymbiosisButton.setOnAction(event -> {
