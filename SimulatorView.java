@@ -89,6 +89,7 @@ public class SimulatorView extends Application {
         //after the ok button clicked it should do the next three lines 
         //simulator = new shape...
         //Orignalstage
+        
   
      
     });
