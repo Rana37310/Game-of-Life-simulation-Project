@@ -25,6 +25,8 @@ public class Mycoplasma extends Cell {
 
     /**
     * This is how the Mycoplasma decides if it's alive or not
+    * If it encounters a Spiral neighbor, it will die in next genration; 
+    * otherwise, it will follow its own life principle.
     */
     public void act() {
         List<Cell> neighbours = getField().getLivingNeighbours(getLocation());
@@ -48,13 +50,13 @@ public class Mycoplasma extends Cell {
             if (isAlive() && neighbours.size()==2||neighbours.size()==3) 
         {
                  setNextState(true);
-                setColor(Color.ORANGE);
+                //setColor(Color.ORANGE);
         }
         
         if (!isAlive()&& neighbours.size()==3) 
             {
                  setNextState(true);
-                setColor(Color.ORANGE);
+               // setColor(Color.ORANGE);
             }
         }
             

@@ -81,6 +81,9 @@ public class Simulator {
           location = field.randomAdjacentLocation(location);
           Purple myPur = new Purple(field, location, Color.DARKORCHID);
           
+          location = field.randomAdjacentLocation(location);
+          Uncertain u = new Uncertain(field, location, Color.BLUE);
+          
 
           
           double random = rand.nextDouble();

@@ -39,8 +39,6 @@ public class Spiral extends Cell
             setNextState(false);
         }
         else
-             
-        
         {
             /*
              * if the cell has even number of neibougrs and the size
@@ -49,7 +47,7 @@ public class Spiral extends Cell
            if (isAlive() && neighbours.size() < 7 && neighbours.size()%2==0) 
            {
                  setNextState(true);
-                setColor(Color.GREEN);
+               // setColor(Color.GREEN);
         }
         
             /*
@@ -59,7 +57,7 @@ public class Spiral extends Cell
         if (!isAlive() && neighbours.size() < 7 && neighbours.size()%2==1) //odd
             {
                  setNextState(true);
-                setColor(Color.GREEN);
+               // setColor(Color.GREEN);
             } 
         }
             

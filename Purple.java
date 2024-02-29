@@ -22,7 +22,7 @@ public class Purple extends Cell
     
     /**
     * This is how the Purple decides if it's alive or not
-    * If it encounters a Mycoplasma neighbor, it will die in next genration; 
+    * If it encounters a Spiral neighbor, it will die in next genration; 
     * otherwise, it will follow its own life principle.
     */
     public void act()
@@ -47,17 +47,15 @@ public class Purple extends Cell
             if (isAlive() && neighbours.size()==1||neighbours.size()==2) 
           {
                  setNextState(true);
-                setColor(Color.DARKORCHID);
           }
         /*
          * if a dead cell has exactly 2 
          * neighbours it lives next generation
          */
-        
           if (!isAlive()&& neighbours.size()==2) 
             {
                  setNextState(true);
-                setColor(Color.DARKORCHID);
+              
             }
         }
     }
