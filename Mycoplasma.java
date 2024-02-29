@@ -39,11 +39,13 @@ public class Mycoplasma extends Cell {
          if (neighbor instanceof Spiral) 
         {
             setNextState(true);
+            neighbor.setNextState(true);
             
         }
         else if(neighbor instanceof Purple)
         {
             setNextState(false);
+            neighbor.setNextState(true);
         }
         else
         {
@@ -58,8 +60,7 @@ public class Mycoplasma extends Cell {
                  setNextState(true);
                // setColor(Color.ORANGE);
             }
-        }
-            
+        }   
        }
     }
 }

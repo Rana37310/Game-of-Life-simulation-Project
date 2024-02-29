@@ -33,11 +33,14 @@ public class Spiral extends Cell
         for (Cell neighbor : neighbours)
         {
         
-            
+        
          if (neighbor instanceof Purple) 
         {
             setNextState(false);
+            neighbor.setNextState(false);
         }
+        
+        
         else
         {
             /*

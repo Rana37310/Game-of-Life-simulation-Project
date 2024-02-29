@@ -88,6 +88,7 @@ public class Simulator {
           
           double random = rand.nextDouble();
           
+
           if (random <= MYCOPLASMA_ALIVE_PROB) { // r< 0.25
             cells.add(myco);
           }
@@ -114,6 +115,15 @@ public class Simulator {
           else {
             spir.setDead();
             cells.add(spir);
+          }
+          
+          if(random >= .75 && random < 1)   // 0.5< rand <= 0.75
+          {
+             cells.add(u); 
+          }
+          else {
+            u.setDead();
+            cells.add(u);
           }
         }
         

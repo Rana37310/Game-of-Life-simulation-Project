@@ -32,19 +32,23 @@ public class Purple extends Cell
         
         for (Cell neighbor : neighbours)
         {
+         
             
         if (neighbor instanceof Spiral) 
         {
             setNextState(false);
+            neighbor.setNextState(false);
             
         }
         else
+             
+        
         { 
         /*
          * if the cell has 2 or less 
          * neighbours it live next generation
          */
-            if (isAlive() && neighbours.size()==1||neighbours.size()==2) 
+            if (isAlive() && neighbours.size()<4) 
           {
                  setNextState(true);
           }
@@ -52,7 +56,7 @@ public class Purple extends Cell
          * if a dead cell has exactly 2 
          * neighbours it lives next generation
          */
-          if (!isAlive()&& neighbours.size()==2) 
+          if (!isAlive()&& neighbours.size()==4||neighbours.size()==3) 
             {
                  setNextState(true);
               
