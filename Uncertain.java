@@ -10,7 +10,7 @@ import java.util.Random;
 public class Uncertain extends Cell
 {
     /**
-     * Create a new Mycoplasma.
+     * Create a new Uncertain.
      *
      * @param field The field currently occupied.
      * @param location The location within the field.
@@ -61,13 +61,11 @@ public class Uncertain extends Cell
             if (isAlive() && neighbours.size()%3==0) 
         {
                  setNextState(true);
-                //setColor(Color.ORANGE);
         }
         
         if (!isAlive()&& neighbours.size()==1||neighbours.size()==2||neighbours.size()==3  ) 
             {
                  setNextState(true);
-               // setColor(Color.ORANGE);
             }
         }
              
@@ -81,7 +79,6 @@ public class Uncertain extends Cell
            if (isAlive() && neighbours.size()%2==0) 
            {
                  setNextState(true);
-               // setColor(Color.GREEN);
         }
         
             /*
@@ -91,14 +88,13 @@ public class Uncertain extends Cell
         if (!isAlive()&& neighbours.size()%2==1) //odd
             {
                  setNextState(true);
-               // setColor(Color.GREEN);
             } 
         }
             
       
         }
       
-        setColor(Color.BLUE);
+        //setColor(Color.BLUE);
     }
     
    }

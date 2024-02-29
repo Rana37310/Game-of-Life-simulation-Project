@@ -22,18 +22,19 @@ public class Purple extends Cell
     
     /**
     * This is how the Purple decides if it's alive or not
-    * If it encounters a Spiral neighbor, it will die in next genration; 
-    * otherwise, it will follow its own life principle.
+    * If it encounters a Spiral neighbor, both will die in next genration; 
+    * otherwise, if the cell has 3 or less 
+    * neighbours it live next generation
+    * If a dead cell has exactly 3 or 4 
+    * neighbours it lives next generation
     */
     public void act()
     {
         List<Cell> neighbours = getField().getLivingNeighbours(getLocation());
-        setNextState(false);// recheck its line position 
+        setNextState(false);
         
         for (Cell neighbor : neighbours)
-        {
-         
-            
+        {   
         if (neighbor instanceof Spiral) 
         {
             setNextState(false);
@@ -41,22 +42,13 @@ public class Purple extends Cell
             
         }
         else
-             
-        
         { 
-        /*
-         * if the cell has 2 or less 
-         * neighbours it live next generation
-         */
             if (isAlive() && neighbours.size()<4) 
           {
                  setNextState(true);
           }
-        /*
-         * if a dead cell has exactly 2 
-         * neighbours it lives next generation
-         */
-          if (!isAlive()&& neighbours.size()==4||neighbours.size()==3) 
+          
+          else if (!isAlive()&& neighbours.size()==4||neighbours.size()==3) 
             {
                  setNextState(true);
               
