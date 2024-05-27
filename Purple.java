@@ -1,81 +1,65 @@
 import javafx.scene.paint.Color; 
 import java.util.List;
 /**
- * Write a description of class Purple here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Rana Albedaiwi and Hatoon Fallatah
+ * 
  */
 public class Purple extends Cell
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
+    
     /**
-     * Constructor for objects of class Purple
+     * Create a new Purple.
+     *
+     * @param field The field currently occupied.
+     * @param location The location within the field.
      */
     public Purple(Field field, Location location, Color col) {
         super(field, location, col);
     }
 
     
+    /**
+    * This is how the Purple decides if it's alive or not
+    * If it encounters a Spiral neighbor, both will die in next genration; 
+    * otherwise, if the cell has 3 or less 
+    * neighbours it live next generation
+    * If a dead cell has exactly 3 or 4 
+    * neighbours it lives next generation
+    */
     public void act()
     {
-        
-
-           List<Cell> neighbours =getField().getLivingNeighbours(getLocation());
-        setNextState(false);// recheck its line position 
-    /*
-        if (isAlive()) {
-            if (neighbours.size()<=7)
-                setNextState(true);
-        }
-        
-        if (!isAlive()&& neighbours.size()<3) {
-                setNextState(true);
-                //setColor(Color.GREEN);
-        }
-    */
+        List<Cell> neighbours = getField().getLivingNeighbours(getLocation());
+        int size = neighbours.size();
+        setNextState(false);
     
-   
-        if (isAlive()) {
-            if (neighbours.size()==1||neighbours.size()==2)
-                setNextState(true);
-        }
-        
-        if (!isAlive()&& neighbours.size()==2) {
-                setNextState(true);
-        }
-
+              if(!SpiralNeighborExist(neighbours))
+              {
+                if (isAlive() && size<4) 
+                 setNextState(true);
+                 else if (!isAlive()&& size==4||size==3) 
+                 setNextState(true);
+                  
+              }       
     }
-    
-    
-    
-    
-    public List<Cell> getPurpleNeighbours(  List<Cell> neighbours)
+
+    /**
+     * Check if there is a Spiral neighbour or not 
+     * if found, set their next states
+     * @return true if found, false otherwise.
+     */
+    private boolean SpiralNeighborExist(List<Cell> neighbours)
     {
-        
-        for( int i=0; i<neighbours.size() ;i++)
+         for (Cell neighbour : neighbours)
+        {   
+        if (neighbour instanceof Spiral)
         {
-           Cell cell = neighbours.get(i);
-            if (!(cell instanceof Mycoplasma)) 
-            {
-            neighbours.remove(cell);
-        }
+            setAll(false, false, neighbour);
+            return true;
             
         }
-        return neighbours;
-        
     }
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    return false;  
     }
+
 }
