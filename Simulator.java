@@ -71,26 +71,6 @@ public  abstract class  Simulator {
   protected abstract void populate() ;
 
 
-/*
-public  void rpeatedShape()
-{
-    Random r = new Random();
-    int randomRow = r.nextInt(field.getDepth()+1);//1
-    
-    for (int col = 0; col < field.getWidth(); col++) 
-    {
-        Location location = new Location(row, col);
-        Mycoplasma myco = new Mycoplasma(field, location, Color.ORANGE);
-
-        // stable train
-        if (row == 0 && (col == 3 || col == 4 || col == 5 || col == 6)) {
-            cells.add(myco);
-        }
-    }
-    
-    
-}
-
     /**
      * Pause for a given time.
      * @param millisec  The time to pause for, in milliseconds
