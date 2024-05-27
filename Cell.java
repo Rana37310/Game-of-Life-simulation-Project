@@ -1,5 +1,5 @@
 import javafx.scene.paint.Color; 
-
+import java.util.List;
 /**
  * A class representing the shared characteristics of all forms of life
  *
@@ -23,10 +23,12 @@ public abstract class Cell {
      */
     public Cell(Field field, Location location, Color col) {
         alive = true;
-        nextAlive = false;
+        nextAlive = true;
         this.field = field;
         setLocation(location);
         setColor(col);
+        
+        
     }
 
     /**

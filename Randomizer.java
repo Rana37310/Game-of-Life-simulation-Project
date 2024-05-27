@@ -14,7 +14,7 @@ public class Randomizer {
   
     private static final int SEED = 1111;
     private static final Random rand = new Random(SEED);
-    private static final boolean useShared = true;
+    private static final boolean useShared = false;
 
     /**
      * Provide a random generator.
@@ -28,6 +28,8 @@ public class Randomizer {
             return new Random();
         }
     }
+    
+    
 
     /**
      * Reset the randomization.
