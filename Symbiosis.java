@@ -3,90 +3,104 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 /**
- * Write a description of class Symbiosis here.
+ * This class populate different life forms depending on their probability.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Rana Albedaiwi and Hatoon Fallatah
  */
 public class Symbiosis extends Simulator
 {
-    // instance variables - replace the example below with your own
-    private int x;
+
+    private static final double MYCOPLASMA_ALIVE_PROB = 0.2;
+    private static final double PURPLE_ALIVE_PROB = 0.4;
+    private static final double SPIRAL_ALIVE_PROB = 0.6;
+    private static final double UNCERTAIN_ALIVE_PROB =0.8;
 
     /**
      * Constructor for objects of class Symbiosis
      */
-    public Symbiosis(int depth, int width)
+    public Symbiosis()
     {
-         cells = new ArrayList<>();
-        field = new Field(depth, width);
-        ///change
-        reset();
+        super();
     }
     
-       public Symbiosis()
-    {
-        this(SimulatorView.GRID_HEIGHT, SimulatorView.GRID_WIDTH);
-    }
-
+    
      public void reset() {
         generation = 0;
         cells.clear();
         populate();
     }
+    
      protected void populate() 
-    {
+     {
       Random rand = Randomizer.getRandom();
       field.clear();
-   /*   for (int row = 0; row < field.getDepth(); row++) {
+      
+       for (int row = 0; row < field.getDepth(); row++) {
         for (int col = 0; col < field.getWidth(); col++) {
+            
           Location location = new Location(row, col);
           Mycoplasma myco = new Mycoplasma(field, location, Color.ORANGE);
-          if (rand.nextDouble() <= MYCOPLASMA_ALIVE_PROB) {
-            cells.add(myco);
-          }
-          else {
-            myco.setDead();
-            cells.add(myco);
-          }
-         
-      */
-        
-  for (int row = 0; row < field.getDepth(); row++) {
-    for (int col = 0; col < field.getWidth(); col++) {
-        Location location = new Location(row, col);
-        
-            
-            double random = rand.nextDouble();
-            Purple myPur = new Purple(field, location, Color.DARKORCHID);
-            
-            location=field.randomAdjacentLocation(location);
-            
-            Mycoplasma myco = new Mycoplasma(field, location, Color.ORANGE);
-           
-            
-            if (random <= 0.25) {
-                cells.add(myco);
-            } 
-            else
-            {
-                  myco.setDead();
-                cells.add(myco);
-            }
-            
-            
-          if (random > 0.25 && random <=0.5 )  {
+          
+          location = field.randomAdjacentLocation(location);
+          Spiral spiral = new Spiral(field, location, Color.GREEN);
+          
+          location = field.randomAdjacentLocation(location);
+          Purple purple = new Purple(field, location, Color.DARKORCHID);
+          
+          location = field.randomAdjacentLocation(location);
+          Uncertain uncrtain = new Uncertain(field, location, Color.BLUE);
+          
+          double random = rand.nextDouble();
+          
+    
+          if (random <= MYCOPLASMA_ALIVE_PROB)
+           addCell(myco);
+           else 
+           destoryCell(myco);
 
-                cells.add(myPur);
-            }
-             else {
-              
-                myPur.setDead();
-                 cells.add(myPur);
-                 
-            }
+          if (random > MYCOPLASMA_ALIVE_PROB && random<=PURPLE_ALIVE_PROB) 
+            addCell(spiral);
+          else
+          destoryCell(spiral);
+       
+         if(random > PURPLE_ALIVE_PROB && random<=SPIRAL_ALIVE_PROB)
+            addCell(purple);
+           else
+          destoryCell(purple);
+          
+         if(random> SPIRAL_ALIVE_PROB && random<=UNCERTAIN_ALIVE_PROB)
+            addCell(uncrtain);
+            else 
+            destoryCell(uncrtain);
             
         }
     }
-}
-}
+    }
+    
+
+      private void addCell(Cell cell)
+    {
+       cells.add(cell);
+        
+    }
+    
+    private void destoryCell(Cell cell)
+    {
+        cell.setDead();
+        cells.add(cell);
+    }
+    
+      protected void defaultPopulat()
+    {
+    
+     for (int row = 0; row < field.getDepth(); row++) {
+        for (int col = 0; col < field.getWidth(); col++) {
+          Location location = new Location(row, col);
+          Mycoplasma myco = new Mycoplasma(field, location, Color.BEIGE);
+            myco.setDead();
+            cells.add(myco);
+          }
+        }
+       
+    }
+} 

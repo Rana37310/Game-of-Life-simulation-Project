@@ -11,16 +11,15 @@ import java.util.Random;
  *
  * @author David J. Barnes, Michael Kölling & Jeffery Raphael
  * @version 2024.02.03
+ * edited by Rana Albedaiwi and Hatoon Fallatah
  */
 
 public  abstract class  Simulator {
 
-    protected static final double MYCOPLASMA_ALIVE_PROB = .25;
-    protected static final double PURPLE_ALIVE_PROB = .5;
     protected List<Cell> cells;
     protected Field field;
     protected int generation;
-    //private List<Cell> shape 
+
 
     /**
      * Construct a simulation field with default size.
@@ -60,23 +59,26 @@ public  abstract class  Simulator {
     }
 
     /**
-     * Reset the simulation to a starting position.
+     * Reset implemented in subclasses. 
      */
     public abstract void reset() ;
 
     /**
-     * Randomly populate the field live/dead life forms
+     * populate implemented in subclasses. 
      */
-
-  protected abstract void populate() ;
-
-
+    protected  abstract void populate() ;
+    
     /**
-     * Pause for a given time.
-     * @param millisec  The time to pause for, in milliseconds
-     */
-public void delay(int millisec) 
-{
+    * Populate each location in the field with a dead Mycoplasma object.To avoid any null pointer exception.
+    */
+  
+    
+
+ 
+
+
+    public void delay(int millisec) 
+    {
         try {
             Thread.sleep(millisec);
         }
