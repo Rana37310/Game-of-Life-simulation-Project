@@ -8,6 +8,7 @@ import java.util.List;
  * about 14,000 genes.
  *
  * @author David J. Barnes, Michael Kölling & Jeffery Raphael
+ * Edited by Rana and Hatoon
  * @version 2022.01.06
  */
 
@@ -19,66 +20,56 @@ public class Mycoplasma extends Cell {
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    
-    
     public Mycoplasma(Field field, Location location, Color col) {
         super(field, location, col);
     }
 
-
     /**
     * This is how the Mycoplasma decides if it's alive or not
+    * If it encounters a Spiral neighbor, they will both live in next genration; 
+    * if it encounters a Purple neighbor it will die and Purple will survive
+    * otherwise, it will follow its own life principle.
     */
-    public void act() {
-        
+    public void act() 
+    {
         List<Cell> neighbours = getField().getLivingNeighbours(getLocation());
-       // neighbours=getMycoplasmaNeighbours(neighbours);
-        setNextState(false);// recheck its line position 
-    
-        if (isAlive()) {
-            if (neighbours.size()==2||neighbours.size()==3)
-                setNextState(true);
-        }
-        
-        if (!isAlive()&& neighbours.size()==3) {
-                setNextState(true);
-                //setColor(Color.GREEN);
-        }
+        int size = neighbours.size();
+        setNextState(false);
         
 
-        
-       
-    } 
+          if(!spiralOrPurpleNeighborExist(neighbours))
+          {
+               if (isAlive() && size==2||size==3) 
+                     setNextState(true);
+               else if (!isAlive()&& size==3)
+                     setNextState(true);   
+          }
+                   
+                  
+       }
     
-    
-    public List<Cell> getMycoplasmaNeighbours(  List<Cell> neighbours)
+     /**
+     * Check if there is a Spiral or Purple neighbour or not 
+     * if found, set their next state as follows 
+     * @return true if found, false otherwise.
+     */
+    private boolean spiralOrPurpleNeighborExist(List<Cell> neighbours)
     {
-        
-        for( int i=0; i<neighbours.size() ;i++)
-        {
-           Cell cell = neighbours.get(i);
-            if (!(cell instanceof Mycoplasma)) 
-            {
-            neighbours.remove(cell);
-        }
-            
-        }
-        return neighbours;
+         for (Cell neighbor : neighbours)
+             { 
+             if (neighbor instanceof Spiral) 
+                {
+                    setAll(true,true,neighbor);
+                    return true;  
+                }    
+             else if(neighbor instanceof Purple)
+             {
+                 setAll(false,true,neighbor);
+                 return true;
+             }
+               
+            }
+            return false;
         
     }
-        /*
-        if( this.getLocation().getRow()==rows-1|| this.getLocation().getRow()==0)
-            setColor(Color.RED);
-            
-         if( this.getLocation().getCol()==0 || this.getLocation().getCol()==cols-1)
-            setColor(Color.DARKORCHID);
-            
-    */
-        
-      //  if ( this.getLocation().getRow()<10)
-      //  {
-     //       setNextState(false);
-      //  }
-        
-
 }
