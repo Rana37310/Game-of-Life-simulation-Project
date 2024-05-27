@@ -4,6 +4,7 @@ import java.util.List;
  * A class representing the shared characteristics of all forms of life
  *
  * @author David J. Barnes, Michael Kölling & Jeffery Raphael
+ * Edited by Rana and Hatoon
  * @version 2022.01.06
  */
 
@@ -36,6 +37,12 @@ public abstract class Cell {
      * next generation.
      */
     abstract public void act();
+
+     protected void setAll(boolean selfState , boolean neighborState, Cell neighbor )
+    {
+         this.setNextState(selfState);
+        neighbor.setNextState(neighborState);
+    }
 
     /**
      * Check whether the cell is alive or not.
