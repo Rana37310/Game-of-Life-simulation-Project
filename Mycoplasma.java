@@ -1,3 +1,4 @@
+
 import javafx.scene.paint.Color; 
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  * about 14,000 genes.
  *
  * @author David J. Barnes, Michael Kölling & Jeffery Raphael
- * Edited by Rana and Hatoon
+ * edited by Rana and Hatoon
  * @version 2022.01.06
  */
 
