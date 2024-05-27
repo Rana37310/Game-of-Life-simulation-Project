@@ -1,12 +1,11 @@
-------------------------------------------------------------------------
-This is the project README file. Here, you should describe your project.
-Tell the reader (someone who does not know anything about this project)
-all they need to know. The comments should usually include at least:
-------------------------------------------------------------------------
 
-PROJECT TITLE:
-PURPOSE OF PROJECT:
-VERSION or DATE:
-HOW TO START THIS PROJECT:
-AUTHORS:
-USER INSTRUCTIONS:
+PROJECT TITLE: Game of Life simulation
+PURPOSE OF PROJECT: Simulate and predicate the life cycle of different life forms.
+VERSION or DATE: 29th February 2024.
+AUTHORS: Rana Albedaiwi and Hatoon Fallatah.
+USER INSTRUCTIONS: This code needs to be opened through BlueJ to work properly.
+COURSEWORK: The coursework details are uploaded in a file named "CourseWork" for your reference.
+REPORT: The project details are uploaded in a file named "Game-of-Life-simulation-report" for your reference.
+Please take a look at the coursework and report to have a better understanding.
+
+
